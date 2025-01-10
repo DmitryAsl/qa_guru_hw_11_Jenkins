@@ -3,7 +3,7 @@ from helpers.users import test_user
 import allure
 
 
-def test_registration_form():
+def test_registration_form(browser_config):
     with allure.step('Открытие формы регистрации'):
         registration_form = RegistrationPage()
         registration_form.open()

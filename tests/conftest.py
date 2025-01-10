@@ -18,6 +18,7 @@ def browser_config(request):
             "enableVideo": True
         }
     }
+    options.page_load_strategy = 'eager'
     options.capabilities.update(selenoid_capabilities)
     driver = webdriver.Remote(
         command_executor=f"https://user1:1234@selenoid.autotests.cloud/wd/hub",

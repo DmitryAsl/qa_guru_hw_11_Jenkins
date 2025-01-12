@@ -105,6 +105,7 @@ class RegistrationPage:
         self.__fill_gender(user.gender)
         self.__fill_mobile(user.mobile)
         self.__fill_birthday(user.birth_day, user.birth_month, user.birth_year)
+        self.remove_banners()
         self.__fill_subjects(user.subjects)
         self.__fill_hobbby(user.hobby)
         self.__fill_picture(user.picture)
@@ -113,6 +114,10 @@ class RegistrationPage:
         self.__fill_city(user.city)
 
         self.__submit()
+
+    def remove_banners(self):
+        browser.driver.execute_script("$('#fixedban').remove()")
+        browser.driver.execute_script("$('footer').remove()")
 
     def should_registered_user_with(self, user: User):
         self.__assert_filled_full_name(user.firstName, user.lastName)

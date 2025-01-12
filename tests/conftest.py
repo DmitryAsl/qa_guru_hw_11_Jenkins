@@ -4,14 +4,21 @@ from selene import browser
 from selenium.webdriver.chrome.options import Options
 from utils import attach
 
+def pytest_addoption(parser):
+    parser.addoption(
+        '--browser',
+        help='Выбери браузер на котором будут запущены тесты',
+        choices=['chrome', 'firefox'],
+        default='chrome'
+    )
 
 @pytest.fixture(scope='function')
 def browser_config(request):
-    # driver_options.add_argument("--headless")
+    browser_name = request.config.getoption('--browser')
     options = Options()
     selenoid_capabilities = {
-        "browserName": "chrome",
-        "browserVersion": "126.0",
+        "browserName": browser_name,
+        "browserVersion": "125.0",
         "selenoid:options": {
             "enableVNC": True,
             "enableVideo": True

@@ -8,7 +8,7 @@ def add_screenshot(browser):
 
 
 def add_logs(browser):
-    if browser.driver.capabilities['brawserName'] == 'firefox':
+    if browser.driver.capabilities['browserName'] == 'firefox':
         print('Логирование браузера не поддерживается в Firefox')
         return
     log = "".join(f'{text}\n' for text in browser.driver.get_log(log_type='browser'))

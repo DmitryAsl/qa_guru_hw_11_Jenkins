@@ -8,6 +8,9 @@ def add_screenshot(browser):
 
 
 def add_logs(browser):
+    if browser.driver.capabilities['brawserName'] == 'firefox':
+        print('Логирование браузера не поддерживается в Firefox')
+        return
     log = "".join(f'{text}\n' for text in browser.driver.get_log(log_type='browser'))
     allure.attach(body=log, name='browser_logs', attachment_type=AttachmentType.TEXT, extension='.log')
 

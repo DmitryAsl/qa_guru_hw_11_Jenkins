@@ -1,8 +1,12 @@
+import os
+
 import pytest
 from selenium import webdriver
 from selene import browser
 from selenium.webdriver.chrome.options import Options
 from utils import attach
+from dotenv import load_dotenv
+
 
 def pytest_addoption(parser):
     parser.addoption(
@@ -19,6 +23,12 @@ def pytest_addoption(parser):
         default='125.0'
     )
 
+
+@pytest.fixture(scope='session', autouse=True)
+def load_env():
+    load_dotenv()
+
+
 @pytest.fixture(scope='function')
 def browser_config(request):
     browser_name = request.config.getoption('--browser')
@@ -34,8 +44,12 @@ def browser_config(request):
     }
     options.page_load_strategy = 'eager'
     options.capabilities.update(selenoid_capabilities)
+
+    login = os.getenv('LOGIN')
+    password = os.getenv("PASSWORD")
+
     driver = webdriver.Remote(
-        command_executor=f"https://user1:1234@selenoid.autotests.cloud/wd/hub",
+        command_executor=f"https://{login}:{password}@selenoid.autotests.cloud/wd/hub",
         options=options)
 
     browser.config.driver = driver

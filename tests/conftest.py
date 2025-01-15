@@ -11,14 +11,14 @@ from dotenv import load_dotenv
 def pytest_addoption(parser):
     parser.addoption(
         '--browser',
-        help='Выбери браузер на котором будут запущены тесты',
+        help='Браузер на котором будут запущены тесты',
         choices=['chrome', 'firefox'],
         default='chrome'
     )
 
     parser.addoption(
         '--browser_version',
-        help='Выбери версию браузеоа на котором будут запущены тесты',
+        help='Версия браузера на котором будут запущены тесты',
         choices=['126.0', '125.0', '124.0', '123.0', '100.0'],
         default='125.0'
     )
